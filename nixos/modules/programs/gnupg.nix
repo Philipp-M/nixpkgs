@@ -105,7 +105,7 @@ in
         Requires = [ "gpg-agent.socket" ];
       };
       serviceConfig = {
-        ExecStart = "${cfg.package}/bin/gpg-agent --supervised";
+        ExecStart = "${cfg.package}/bin/gpg-agent --supervised --options ${config.environment.etc."gnupg/gpg-agent.conf".source}";
         ExecReload = "${cfg.package}/bin/gpgconf --reload gpg-agent";
       };
     };
