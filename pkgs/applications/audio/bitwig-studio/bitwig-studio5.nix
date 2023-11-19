@@ -29,6 +29,7 @@
   libxcb-util,
   libxcb-wm,
   libxtst,
+  libxext,
   libxcursor,
   libx11,
   libxcb,
@@ -73,6 +74,7 @@ stdenv.mkDerivation (finalAttrs: {
     libxcursor
     libx11
     libxtst
+    libxext
     libxkbcommon
     libudev-zero
     pango
