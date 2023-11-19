@@ -66,6 +66,7 @@ stdenv.mkDerivation rec {
     libnghttp2
     xorg.libxcb
     xorg.libXcursor
+    xorg.libXext
     xorg.libX11
     xorg.libXtst
     libxkbcommon
