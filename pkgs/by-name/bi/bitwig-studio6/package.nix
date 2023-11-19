@@ -25,6 +25,7 @@
   libxcursor,
   libxkbcommon,
   libxtst,
+  libxext,
   makeBinaryWrapper,
   pango,
   pipewire,
@@ -77,6 +78,7 @@ stdenv.mkDerivation (finalAttrs: {
     libxcursor
     libxkbcommon
     libxtst
+    libxext
     pango
     pipewire
     vulkan-loader
