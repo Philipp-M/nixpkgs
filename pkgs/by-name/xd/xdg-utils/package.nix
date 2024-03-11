@@ -162,45 +162,45 @@ let
       ''}";
     }
 
-    {
-      scripts = [ "bin/xdg-open" ];
-      interpreter = "${bash}/bin/bash";
-      inputs = commonDeps ++ [
-        hostname
-        glib.bin
-        "${placeholder "out"}/bin"
-      ];
-      execer = [
-        "cannot:${placeholder "out"}/bin/xdg-mime"
-      ];
-      # These are desktop-specific, so we don't want xdg-utils to be able to
-      # call them when in a different setup.
-      fake.external = commonFakes ++ [
-        "cygstart" # Cygwin
-        "dde-open" # Deepin
-        "enlightenment_open" # Enlightenment
-        "exo-open" # XFCE
-        "gio" # GNOME (new)
-        "gnome-open" # GNOME (very old)
-        "gvfs-open" # GNOME (old)
-        "kde-open" # Plasma
-        "kfmclient" # KDE3
-        "mate-open" # MATE
-        "mimeopen" # alternative tool for file, pulls in perl, avoid
-        "open" # macOS
-        "pcmanfm" # LXDE
-        "qtxdg-mat" # LXQT
-        "run-mailcap" # generic
-        "rundll32.exe" # WSL
-        "wslpath" # WSL
-      ];
-      fix."$printf" = [ "printf" ];
-      keep = {
-        "env:$command" = true;
-        "$browser" = true;
-        "$KDE_SESSION_VERSION" = true;
-      };
-    }
+    # {
+    #   scripts = [ "bin/xdg-open" ];
+    #   interpreter = "${bash}/bin/bash";
+    #   inputs = commonDeps ++ [
+    #     hostname
+    #     glib.bin
+    #     "${placeholder "out"}/bin"
+    #   ];
+    #   execer = [
+    #     "cannot:${placeholder "out"}/bin/xdg-mime"
+    #   ];
+    #   # These are desktop-specific, so we don't want xdg-utils to be able to
+    #   # call them when in a different setup.
+    #   fake.external = commonFakes ++ [
+    #     "cygstart" # Cygwin
+    #     "dde-open" # Deepin
+    #     "enlightenment_open" # Enlightenment
+    #     "exo-open" # XFCE
+    #     "gio" # GNOME (new)
+    #     "gnome-open" # GNOME (very old)
+    #     "gvfs-open" # GNOME (old)
+    #     "kde-open" # Plasma
+    #     "kfmclient" # KDE3
+    #     "mate-open" # MATE
+    #     "mimeopen" # alternative tool for file, pulls in perl, avoid
+    #     "open" # macOS
+    #     "pcmanfm" # LXDE
+    #     "qtxdg-mat" # LXQT
+    #     "run-mailcap" # generic
+    #     "rundll32.exe" # WSL
+    #     "wslpath" # WSL
+    #   ];
+    #   fix."$printf" = [ "printf" ];
+    #   keep = {
+    #     "env:$command" = true;
+    #     "$browser" = true;
+    #     "$KDE_SESSION_VERSION" = true;
+    #   };
+    # }
 
     {
       scripts = [ "bin/xdg-screensaver" ];
