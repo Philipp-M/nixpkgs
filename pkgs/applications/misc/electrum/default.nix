@@ -4,6 +4,7 @@
   fetchurl,
   wrapQtAppsHook,
   python3,
+  fetchpatch,
   zbar,
   enableQt ? true,
   enablePythonEcdsa ? false,
@@ -97,6 +98,25 @@ python3.pkgs.buildPythonApplication (finalAttrs: {
     ];
   disabledTestPaths = lib.optionals (!enableQt) [
     "tests/test_qml_types.py"
+  ];
+  patches = [
+    # aiorpcx 0.24 compatibility
+    # Note: this patches `/run_electrum`.
+    # In the source repo, `/electrum/electrum`
+    # is a symlink to `../run_electrum`,
+    # so that path would also be affected by the patch.
+    # However, in the distribution tarball used here,
+    # `/electrum/electrum` is simply an exact copy of
+    # `/run_electrum` and is thereby *not* affected.
+    # So we have to manually copy the patched `/run_electrum`
+    # over `/electrum/electrum` after the patching (see below).
+    # XXX remove the copy command in `postPatch`
+    # as soon as the patch itself is removed!
+    (fetchpatch {
+      url = "https://github.com/spesmilo/electrum/commit/171aa5ee5ad4e25b9da10f757d9d398e905b4945.patch";
+      hash = "sha256-xj27+OxhbPJdfXFlSqoKgnhrAu2paC+ZOCxjkaL9zeg=";
+      excludes = [ "contrib/requirements/requirements.txt" ]; # patch does not apply to this file
+    })
   ];
 
   postPatch =
