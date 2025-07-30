@@ -309,7 +309,7 @@ stdenv.mkDerivation (finalAttrs: {
   # Use find -type f -executable -exec echo {} \; -exec sh -c 'ldd {} | grep "not found"' \;
   # Looks like a bug in installer scripts.
   postFixup = ''
-    export SAMBA_LIBS="$(find $out -type f -regex '.*\${stdenv.hostPlatform.extensions.sharedLibrary}\(\..*\)?' -exec dirname {} \; | sort | uniq)"
+    export SAMBA_LIBS="$(find $out -type f -regex '.*\${stdenv.hostPlatform.extensions.sharedLibrary or ".a"}\(\..*\)?' -exec dirname {} \; | sort | uniq)"
     read -r -d "" SCRIPT << EOF || true
     [ -z "\$SAMBA_LIBS" ] && exit 1;
     BIN='{}';
@@ -329,7 +329,7 @@ stdenv.mkDerivation (finalAttrs: {
   ''
   + ''
     EOF
-    find $out -type f -regex '.*\${stdenv.hostPlatform.extensions.sharedLibrary}\(\..*\)?' -exec $SHELL -c "$SCRIPT" \;
+    find $out -type f -regex '.*\${stdenv.hostPlatform.extensions.sharedLibrary or ".a"}\(\..*\)?' -exec $SHELL -c "$SCRIPT" \;
     find $out/bin -type f -exec $SHELL -c "$SCRIPT" \;
 
     # Fix PYTHONPATH for some tools
