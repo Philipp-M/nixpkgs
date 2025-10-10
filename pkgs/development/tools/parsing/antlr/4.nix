@@ -110,7 +110,7 @@ let
 
           cmakeDir = "../runtime/Cpp";
 
-          cmakeFlags = extraCppCmakeFlags;
+          cmakeFlags = extraCppCmakeFlags ++ [ (lib.strings.cmakeFeature "CMAKE_POLICY_VERSION_MINIMUM" "3.5") ];
 
           meta = {
             description = "C++ target for ANTLR 4";
