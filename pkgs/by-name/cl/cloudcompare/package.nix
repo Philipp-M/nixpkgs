@@ -42,6 +42,16 @@ stdenv.mkDerivation (finalAttrs: {
     })
   ];
 
+  postPatch = ''
+    substituteInPlace libs/qCC_db/include/ccGLMatrixTpl.h \
+      --replace-fail 'QString::SkipEmptyParts' 'Qt::SkipEmptyParts' \
+      --replace-fail '<< endl;' '<< Qt::endl;'
+
+    substituteInPlace qCC/ccRasterizeTool.cpp \
+      --replace-fail 'char** papszMetadata = poDriver->GetMetadata();' \
+      'CSLConstList papszMetadata = poDriver->GetMetadata();'
+  '';
+
   nativeBuildInputs = [
     cmake
     eigen # header-only
