@@ -29,6 +29,9 @@ stdenv.mkDerivation (finalAttrs: {
   nativeBuildInputs = [
     cmake
     pkg-config
+  ]
+  ++ lib.optionals cudaSupport [
+    cudaPackages.cuda_nvcc
   ];
   buildInputs = [
     cairo
@@ -37,7 +40,6 @@ stdenv.mkDerivation (finalAttrs: {
   ]
   ++ lib.optionals cudaSupport [
     cudaPackages.cuda_cudart
-    cudaPackages.cuda_nvcc
   ];
 
   postInstall = lib.optionalString stdenv.hostPlatform.isDarwin ''
