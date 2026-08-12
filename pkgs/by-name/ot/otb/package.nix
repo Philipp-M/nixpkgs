@@ -238,6 +238,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   patches = [
     ./1-otb-swig-include-itk.diff
+    ./gdal-3.13-const-metadata.diff
   ];
 
   postPatch = ''
