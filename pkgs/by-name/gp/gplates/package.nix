@@ -35,13 +35,13 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "gplates";
-  version = "2.5.0-dev3";
+  version = "2.6.0-dev4";
 
   src = fetchFromGitHub {
     owner = "GPlates";
     repo = "GPlates";
-    rev = "e3ec5a4ee58147d21d8b42050c4c7e78f861f21c";
-    hash = "sha256-/y+fozK6DvoVuS1I1ZdWtRwy+M/XRFyLDWHcUFu2++M=";
+    rev = "b4fa68e49ff5e77408b90b8a3f32ed77c9e2325c";
+    hash = "sha256-BRr+ONGYk0JmdakCJnya0bDvk2V3qbMBzkbzqqaZe/s=";
   };
 
   nativeBuildInputs = [
